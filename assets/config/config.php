@@ -1,6 +1,6 @@
 <?php
 
-use Zahzah\LaravelStub\Commands\InstallMakeCommand;
+use Hanafalah\LaravelStub\Commands\InstallMakeCommand;
 
 return [
     'stub' => [

@@ -1,8 +1,8 @@
 {
-    "name": "zahzah/laravel-stub",
+    "name": "hanafalah/laravel-stub",
     "autoload": {
         "psr-4": {
-            "Zahzah\\LaravelStub\\": "src/"
+            "Hanafalah\\LaravelStub\\": "src/"
         },
         "files": [
             "src/helpers.php"
@@ -17,13 +17,13 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Zahzah\\LaravelStub\\LaravelStubServiceProvider"
+                "Hanafalah\\LaravelStub\\LaravelStubServiceProvider"
             ]
         }
     },
     "require": {
-        "zahzah/laravel-has-props": "1.x",
-        "zahzah/laravel-support": "1.x"
+        "hanafalah/laravel-has-props": "1.x",
+        "hanafalah/laravel-support": "1.x"
     },
     "minimum-stability": "dev",
     "prefer-stable": false

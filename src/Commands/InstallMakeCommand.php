@@ -1,10 +1,11 @@
 <?php
 
-namespace Zahzah\LaravelStub\Commands;
+namespace Hanafalah\LaravelStub\Commands;
 
-use Zahzah\LaravelSupport\Commands\BaseCommand;
+use Hanafalah\LaravelSupport\Commands\BaseCommand;
 
-class InstallMakeCommand extends BaseCommand{
+class InstallMakeCommand extends BaseCommand
+{
 
     /**
      * The name and signature of the console command.
@@ -28,7 +29,7 @@ class InstallMakeCommand extends BaseCommand{
      */
     public function handle()
     {
-        $provider = 'Zahzah\LaravelStub\LaravelStubServiceProvider';
+        $provider = 'Hanafalah\LaravelStub\LaravelStubServiceProvider';
 
         $this->comment('Installing Laravel Stub...');
         $this->callSilent('vendor:publish', [
@@ -36,10 +37,11 @@ class InstallMakeCommand extends BaseCommand{
             '--tag'      => 'config'
         ]);
         $this->info('✔️  Created config/laravel-stub.php');
-        $this->comment('zahzah/laravel-stub installed successfully.');
+        $this->comment('hanafalah/laravel-stub installed successfully.');
     }
 
-    protected function dir(): string{
-        return __DIR__.'/../../';
+    protected function dir(): string
+    {
+        return __DIR__ . '/../../';
     }
 }

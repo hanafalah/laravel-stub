@@ -1,7 +1,8 @@
 <?php
 
-namespace Zahzah\LaravelStub;
-use Zahzah\LaravelSupport\Providers\BaseServiceProvider;
+namespace Hanafalah\LaravelStub;
+
+use Hanafalah\LaravelSupport\Providers\BaseServiceProvider;
 
 class LaravelStubServiceProvider extends BaseServiceProvider
 {
@@ -13,13 +14,15 @@ class LaravelStubServiceProvider extends BaseServiceProvider
      *
      * @return self The current instance of the class.
      */
-    public function register(){
+    public function register()
+    {
         $this->registerMainClass(Stub::class)
-             ->registerCommandService(Providers\CommandServiceProvider::class)
-             ->registers([
-                '*','Services' => function(){
+            ->registerCommandService(Providers\CommandServiceProvider::class)
+            ->registers([
+                '*',
+                'Services' => function () {
                     $this->binds([
-                        Contracts\Stub::class => function(){
+                        Contracts\Stub::class => function () {
                             return Stub::class;
                         },
                     ]);
@@ -32,7 +35,8 @@ class LaravelStubServiceProvider extends BaseServiceProvider
      *
      * @return string
      */
-    protected function dir(): string{
-        return __DIR__.'/';
+    protected function dir(): string
+    {
+        return __DIR__ . '/';
     }
 }

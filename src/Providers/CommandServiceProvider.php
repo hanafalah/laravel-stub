@@ -1,9 +1,9 @@
 <?php
 
-namespace Zahzah\LaravelStub\Providers;
+namespace Hanafalah\LaravelStub\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Zahzah\LaravelStub\Commands;
+use Hanafalah\LaravelStub\Commands;
 
 class CommandServiceProvider extends ServiceProvider
 {
@@ -16,11 +16,13 @@ class CommandServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register(){
-        $this->commands(config('laravel-stub.commands',$this->__commands));
+    public function register()
+    {
+        $this->commands(config('laravel-stub.commands', $this->__commands));
     }
 
-    public function provides(){
+    public function provides()
+    {
         return $this->__commands;
     }
 }
