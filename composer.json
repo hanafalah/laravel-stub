@@ -1,0 +1,30 @@
+{
+    "name": "zahzah/laravel-stub",
+    "autoload": {
+        "psr-4": {
+            "Zahzah\\LaravelStub\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "hamzah",
+            "email": "hamzahnuralfalah@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Zahzah\\LaravelStub\\LaravelStubServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "zahzah/laravel-has-props": "1.x",
+        "zahzah/laravel-support": "1.x"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false
+}
