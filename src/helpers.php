@@ -8,7 +8,7 @@ if (! function_exists('stub_path')) {
      * @return string
      */
     function stub_path($path = ''){
-        return base_path('stubs/'.$path);
+        return config('laravel-stub.stub.path').$path;
     }
 }
 
@@ -25,9 +25,5 @@ if (! function_exists('to_studly')) {
      */
     function to_studly($name) {
         return \Illuminate\Support\Str::studly($name);
-        // preg_replace_callback('/\b(\w+)/', function ($matches) {
-        //     return ucfirst($matches[1]);
-        //     }, $name);
-        // return preg_replace('/[^A-Za-z0-9]/', '', $name);
     }
 }

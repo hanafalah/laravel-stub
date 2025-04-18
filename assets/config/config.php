@@ -6,7 +6,7 @@ return [
     'stub' => [
         'open_separator'  => '{{',
         'close_separator' => '}}',
-        'path'            => stub_path(),
+        'path'            => base_path('stubs'),
     ],
     'commands'        => [
         InstallMakeCommand::class

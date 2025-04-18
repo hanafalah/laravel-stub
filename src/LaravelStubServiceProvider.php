@@ -16,14 +16,14 @@ class LaravelStubServiceProvider extends BaseServiceProvider
      */
     public function register()
     {
-        $this->registerMainClass(Stub::class)
+        $this->registerMainClass(LaravelStub::class)
             ->registerCommandService(Providers\CommandServiceProvider::class)
             ->registers([
                 '*',
                 'Services' => function () {
                     $this->binds([
                         Contracts\Stub::class => function () {
-                            return Stub::class;
+                            return LaravelStub::class;
                         },
                     ]);
                 }
