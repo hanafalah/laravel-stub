@@ -146,14 +146,20 @@ class LaravelStub
     public function formatArrayAsStub(array $array, int $indentLevel = 2): string{
         $indent = str_repeat('    ', $indentLevel);
         $lines = ["["];
-
+        $isAssoc = array_keys($array) !== range(0, count($array) - 1);
+    
         foreach ($array as $key => $value) {
-            $lines[] = "{$indent}'{$key}' => '{$value}',";
+            if ($isAssoc) {
+                $lines[] = "{$indent}'{$key}' => '{$value}',";
+            } else {
+                $lines[] = "{$indent}'{$value}',";
+            }
         }
-
+    
         $lines[] = str_repeat('    ', $indentLevel - 1) . "]";
         return implode("\n", $lines);
     }
+    
 
     /**
      * Get stub contents.
