@@ -3,10 +3,14 @@
 use Hanafalah\LaravelStub\Commands\InstallMakeCommand;
 
 return [
-    'libs' => [
+    'libs'       => [
         'model' => 'Models',
         'contract' => 'Contracts',
-        'schema' => 'Schemas'
+        'schema' => 'Schemas',
+        'database' => 'Database',
+        'data' => 'Data',
+        'resource' => 'Resources',
+        'migration' => '../assets/database/migrations'
     ],
     'stub' => [
         'open_separator'  => '{{',
