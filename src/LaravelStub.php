@@ -1,8 +1,9 @@
 <?php
 
 namespace Hanafalah\LaravelStub;
+use Illuminate\Support\Str;
 
-class Stub
+class LaravelStub
 {
     /**
      * The stub path.
@@ -49,6 +50,7 @@ class Stub
      */
     public function init(string $path = '', array|callable $replaces = []): self
     {
+        $path = Str::replace(base_path(),'',$path);
         if (\is_callable($replaces) && !is_string($replaces)) $replaces = $replaces();
         return new static($path, $replaces);
     }
@@ -86,6 +88,7 @@ class Stub
      */
     public function getPath(): string
     {
+        if (Str::startsWith($this->path, '/stubs')) $this->path = Str::replace('/stubs', '', $this->path);
         return self::getBasePath() . $this->path;
     }
 
@@ -116,14 +119,47 @@ class Stub
      */
     public function getContents()
     {
-        $contents = file_get_contents($this->getPath());
-        foreach ($this->replaces as $search => $replace) {
+        $contents = file_get_contents($this->getPath());        
+        return $this->updateReplaces($contents,$this->replaces);                
+    }
+
+    private function updateReplaces($contents, array $replaces){
+        $open = config('laravel-stub.stub.open_separator', '$');
+        $close = config('laravel-stub.stub.close_separator', '$');
+        foreach ($replaces as $search => $replace) {
             //CHECKING IF THE REPLACE IS CALLABLE AND NOT STRING ONLY
             if (\is_callable($replace) && !is_string($replace)) $replace = $replace();
-            $contents = str_replace(config('laravel-stub.stub.open_separator', '$') . strtoupper($search) . config('laravel-stub.stub.close_separator', '$'), $replace, $contents);
+            $needle = $open.$search.$close;
+            if (is_array($replace)){
+                if (Str::contains($contents,$needle)){
+                    $mono_replace = $this->formatArrayAsStub($replace);
+                    $contents = str_replace($needle, $mono_replace, $contents);
+                }
+                $contents = $this->updateReplaces($contents,$replace);
+            }else{
+                $contents = str_replace($needle, $replace, $contents);
+            }
         }
         return $contents;
     }
+
+    public function formatArrayAsStub(array $array, int $indentLevel = 2): string{
+        $indent = str_repeat('    ', $indentLevel);
+        $lines = ["["];
+        $isAssoc = array_keys($array) !== range(0, count($array) - 1);
+    
+        foreach ($array as $key => $value) {
+            if ($isAssoc) {
+                $lines[] = "{$indent}'{$key}' => '{$value}',";
+            } else {
+                $lines[] = "{$indent}'{$value}',";
+            }
+        }
+    
+        $lines[] = str_repeat('    ', $indentLevel - 1) . "]";
+        return implode("\n", $lines);
+    }
+    
 
     /**
      * Get stub contents.
@@ -146,7 +182,7 @@ class Stub
     public function saveTo($path, $filename): bool
     {
         if (!is_dir($path)) \mkdir($path, 0777, true);
-        return file_put_contents($path . '\\' . $filename, $this->getContents());
+        return file_put_contents($path . $filename, $this->getContents());
     }
 
     /**
