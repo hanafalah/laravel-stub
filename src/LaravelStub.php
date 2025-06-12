@@ -88,7 +88,7 @@ class LaravelStub
      */
     public function getPath(): string
     {
-        if (Str::startsWith($this->path, '/stubs')) $this->path = Str::replace('/stubs', '', $this->path);
+        if (Str::startsWith($this->path, DIRECTORY_SEPARATOR.'stubs')) $this->path = Str::replace(DIRECTORY_SEPARATOR.'stubs', '', $this->path);
         return self::getBasePath() . $this->path;
     }
 
