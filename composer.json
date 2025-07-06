@@ -5,7 +5,7 @@
             "Hanafalah\\LaravelStub\\": "src/"
         },
         "files": [
-            "src/helpers.php"
+            "src/helper.php"
         ]
     },
     "authors": [
